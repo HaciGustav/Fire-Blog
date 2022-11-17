@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { initializeApp } from 'firebase/app';
 import {
     getAuth,
@@ -22,9 +21,9 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+export const auth = getAuth(app);
 
-export const createUser = async (email, password) => {
+export const register = async (email, password) => {
     try {
         let userCredential = await createUserWithEmailAndPassword(
             auth,
@@ -43,6 +42,6 @@ export const login = async () => {
         console.log(error);
     }
 };
-export const logOut = () => {
+export const logout = async () => {
     signOut(auth);
 };
