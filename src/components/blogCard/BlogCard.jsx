@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
     Author,
     Avatar,
@@ -13,39 +14,32 @@ import {
     Title,
 } from './BlogCard.style';
 
-const BlogCard = () => {
+const BlogCard = ({ article }) => {
+    const { author, imgURL, text, likes, title, date, tags, id } = article;
+    const navigate = useNavigate();
     return (
-        <>
+        <div onClick={() => navigate(`/details/${id}`)}>
             <CardHeader>
                 <Avatar
                     src={
                         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiN-GI6m2DnQonY8yV4IMpStO5d498r3Ac9FNQcwmG&s'
                     }
                 />
-                <Author>author authorovic</Author>
-                <Date>Oct 8</Date>
+                <Author>{author}</Author>
+                <Date>{date}</Date>
             </CardHeader>
             <CardContainer>
                 <CardInfo>
-                    <Title>How does NodeJS handle multiple requests?</Title>
-                    <Overview>
-                        NodeJS Hello Readers , There's a lot of confusion out
-                        there about concurrency and parallelism. Some people use
-                        the terms interchangeably, but they actually refer to
-                        two different things.
-                    </Overview>
+                    <Title>{title}</Title>
+                    <Overview>{text}</Overview>
                     <Tags>
                         <Tag>JavaScript</Tag>
                         <Tag>React</Tag>
                     </Tags>
                 </CardInfo>
-                <Img
-                    src={
-                        'https://miro.medium.com/max/640/1*NCnxWDRt28DuWV2djn2enw.webp'
-                    }
-                />
+                <Img src={imgURL} />
             </CardContainer>
-        </>
+        </div>
     );
 };
 export default BlogCard;
