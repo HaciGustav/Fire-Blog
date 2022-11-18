@@ -16,6 +16,7 @@ import {
     onAuthStateChanged,
     updateProfile,
 } from 'firebase/auth';
+import swal from 'sweetalert';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -104,14 +105,19 @@ export const getAllArticles = async (setArticles) => {
 };
 
 // Add doc into collection
-export const addArticle = async (e, title, imgURL, text, navigate) => {
+export const addArticle = async (e, values, navigate) => {
     e.preventDefault();
     try {
         addDoc(colRef, {
-            title: title,
+            title: values.title,
             author: auth.currentUser.email,
-            imgURL: imgURL,
-            text: text,
+            imgURL: values.url,
+            text: values.text,
+            tags: [
+                { tag: values.tag1 },
+                { tag: values.tag2 },
+                { tag: values.tag3 },
+            ],
             date: new Date().toLocaleDateString('tr'),
         });
         console.log('posted');
@@ -123,14 +129,24 @@ export const addArticle = async (e, title, imgURL, text, navigate) => {
 
 //delete doc from collection
 
-export const deleteArticle = async (id) => {
+export const deleteArticle = async (id, navigate) => {
     const docRef = doc(db, 'Articles', id);
+    const confirm = await swal({
+        title: 'Are you sure?',
+        text: 'Once deleted, you will not be able to recover this article!',
+        icon: 'warning',
+        buttons: true,
+        dangerMode: true,
+    });
 
-    try {
-        deleteDoc(docRef);
-        //TODO: toastify("successfully deleted")
-    } catch (error) {
-        console.log(error.message);
+    if (confirm) {
+        console.log(confirm);
+        try {
+            deleteDoc(docRef);
+            navigate('/');
+        } catch (error) {
+            console.log(error.message);
+        }
     }
 };
 
@@ -144,6 +160,10 @@ export const getArticle = async (id, setArticle) => {
     } catch (error) {
         console.log(error.message);
     }
+};
+
+export const updateArticle = async (id, values) => {
+    const docRef = doc(db, 'Articles', id);
 };
 
 //FIRESTORE END

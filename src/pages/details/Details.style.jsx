@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
-    row-gap: 1.5rem;
+    row-gap: 1rem;
     width: 80%;
     margin-inline: auto;
     margin-top: 1rem;
@@ -40,4 +40,15 @@ export const Img = styled.img`
 export const Article = styled.p`
     line-height: 1.7rem;
     border-bottom: 1px solid #ccc;
+`;
+export const Tags = styled.div`
+    display: flex;
+    margin: 0.3rem 0;
+    column-gap: 0.5rem;
+`;
+export const Tag = styled.span`
+    font-size: 0.8rem;
+    padding: 0.3rem 0.4rem;
+    background-color: #eee;
+    border-radius: 1rem;
 `;

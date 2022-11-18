@@ -1,5 +1,8 @@
 import { Box, Button } from '@mui/material';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useAuthContext } from '../../context/AuthProvider';
+import { deleteArticle, getArticle } from '../../helpers/firebase';
 import {
     Article,
     Author,
@@ -10,9 +13,24 @@ import {
     Header,
     HeaderInfo,
     Img,
+    Tag,
+    Tags,
 } from './Details.style';
 
 const Details = () => {
+    const [article, setArticle] = useState({});
+    const navigate = useNavigate();
+    const { id } = useParams();
+
+    useEffect(() => {
+        getArticle(id, setArticle);
+    }, []);
+
+    const { currentUser } = useAuthContext();
+
+    const { email } = currentUser;
+    const { date, title, imgURL, text, author, tags } = article;
+    console.log(article);
     return (
         <Container>
             <Header>
@@ -20,33 +38,40 @@ const Details = () => {
                     src={'https://www.w3schools.com/howto/img_avatar.png'}
                 />
                 <HeaderInfo>
-                    <Author>Haci Gustave</Author>
-                    <Date>Oct 31</Date>
+                    <Author>{author}</Author>
+                    <Date>{date}</Date>
                 </HeaderInfo>
             </Header>
-            <H1>React props and state, What are they?</H1>
-            <Img src={'https://miro.medium.com/max/1100/0*THv5dSjWd1morrKI'} />
-            <Article>
-                You tried vanilla Javascript to make your website as dynamic as
-                possible. But you secretly wished there was a better way to do
-                it. You got tired of appending children, creating classes, and
-                having an overall sense of redundancy. Then one day after class,
-                you heard the cool kids talking about something called the React
-                library in the back alley. They told you how you can write HTML
-                inside Js and then insert your component into your web
-                application. It sounded fun and you wanted to give it try.
-            </Article>
-            <Box
-                sx={{
-                    display: ' flex',
-                    justifyContent: 'center',
-                    columnGap: '1rem',
-                }}>
-                <Button variant="contained">Update</Button>
-                <Button variant="contained" sx={{ backgroundColor: '#f00' }}>
-                    Delete
-                </Button>
-            </Box>
+            <H1>{title}</H1>
+
+            <Img src={imgURL} />
+            <Tags>
+                {tags?.map((tag, i) => (
+                    <Tag key={i}>{tag.tag}</Tag>
+                ))}
+            </Tags>
+            <Article>{text}</Article>
+
+            {author == email && (
+                <Box
+                    sx={{
+                        display: ' flex',
+                        justifyContent: 'center',
+                        columnGap: '1rem',
+                    }}>
+                    <Button
+                        variant="contained"
+                        onClick={() => navigate(`/edit/${id}`)}>
+                        Update
+                    </Button>
+                    <Button
+                        onClick={() => deleteArticle(id, navigate)}
+                        variant="contained"
+                        sx={{ backgroundColor: '#f00' }}>
+                        Delete
+                    </Button>
+                </Box>
+            )}
         </Container>
     );
 };

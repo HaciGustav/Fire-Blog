@@ -11,7 +11,7 @@ export const Container = styled.div`
     background-position: center;
     background-size: cover;
     @media (max-width: 560px) {
-        height: 100%;
+        height: auto;
     }
 `;
 export const CardContainer = styled.div`

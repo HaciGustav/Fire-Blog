@@ -6,6 +6,8 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { FcGoogle } from 'react-icons/fc';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import { login } from '../../helpers/firebase';
+import { useNavigate } from 'react-router-dom';
 
 const loginSchema = yup.object().shape({
     email: yup.string().email().required(),
@@ -21,6 +23,7 @@ const loginSchema = yup.object().shape({
 });
 
 const Login = () => {
+    const navigate = useNavigate();
     return (
         <Container>
             <CardContainer>
@@ -28,7 +31,10 @@ const Login = () => {
 
                 <Formik
                     initialValues={{ email: '', password: '' }}
-                    validationSchema={loginSchema}>
+                    validationSchema={loginSchema}
+                    onSubmit={(values, actions) => {
+                        actions.resetForm();
+                    }}>
                     {({
                         values,
                         isSubmitting,
@@ -65,7 +71,16 @@ const Login = () => {
                             <LoadingButton
                                 sx={{ marginTop: '0.5rem' }}
                                 loadingPosition="center"
-                                variant="contained">
+                                variant="contained"
+                                type="submit"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    login(
+                                        values.email,
+                                        values.password,
+                                        navigate
+                                    );
+                                }}>
                                 Login
                             </LoadingButton>
                             <LoadingButton
@@ -80,6 +95,5 @@ const Login = () => {
             </CardContainer>
         </Container>
     );
-    console.log(handleChange);
 };
 export default Login;
