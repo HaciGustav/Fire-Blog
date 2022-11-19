@@ -1,12 +1,15 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    width: 85%;
+    width: 75%;
     margin: auto;
     display: flex;
     flex-direction: column;
     row-gap: 1rem;
     position: relative;
+    background-color: #00000014;
+    min-height: 90vh;
+    padding: 1rem 0;
 `;
 
 export const NewBlog = styled.button`

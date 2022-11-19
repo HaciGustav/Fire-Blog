@@ -17,9 +17,9 @@ const Dashboard = () => {
 
     return (
         <Container>
-            {currentUser && (
+            {/* {currentUser && (
                 <NewBlog onClick={() => navigate('/post')}>New</NewBlog>
-            )}
+            )} */}
             {articles?.map((article) => {
                 return <BlogCard key={article?.id} article={article} />;
             })}

@@ -1,12 +1,21 @@
-import { createContext, useContext } from 'react';
-import { getAllArticles } from '../helpers/firebase';
+import { createContext, useContext, useState } from 'react';
+import { getAllArticles, getArticle } from '../helpers/firebase';
 
 const dataContext = createContext();
 
 const DataProvider = ({ children }) => {
-    const dashboardArticles = getAllArticles();
+    const [formValues, setFormValues] = useState({
+        title: '',
+        imgURL: '',
+        text: '',
+        tag1: '',
+        tag2: '',
+        tag3: '',
+        latestUpdate: new Date().toLocaleDateString('tr'),
+    });
+
     return (
-        <dataContext.Provider value={{ dashboardArticles }}>
+        <dataContext.Provider value={{ formValues, setFormValues }}>
             {children}
         </dataContext.Provider>
     );
@@ -14,4 +23,5 @@ const DataProvider = ({ children }) => {
 export const useDataContext = () => {
     return useContext(dataContext);
 };
+
 export default DataProvider;

@@ -19,7 +19,7 @@ export const CardContainer = styled.div`
     border-radius: 1rem;
     padding: 1.5rem;
     width: 90%;
-
+    max-width: 900px;
     display: flex;
     flex-direction: column;
     background-color: transparent;

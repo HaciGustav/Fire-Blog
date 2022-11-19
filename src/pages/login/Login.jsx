@@ -6,8 +6,9 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { FcGoogle } from 'react-icons/fc';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import { login } from '../../helpers/firebase';
+import { login, signUpWithGoogle } from '../../helpers/firebase';
 import { useNavigate } from 'react-router-dom';
+import { NavigateNextRounded } from '@mui/icons-material';
 
 const loginSchema = yup.object().shape({
     email: yup.string().email().required(),
@@ -86,7 +87,8 @@ const Login = () => {
                             <LoadingButton
                                 sx={{ backgroundColor: '#000' }}
                                 loadingPosition="center"
-                                variant="contained">
+                                variant="contained"
+                                onClick={() => signUpWithGoogle(navigate)}>
                                 <FcGoogle /> Continue With Google
                             </LoadingButton>
                         </Form>

@@ -10,6 +10,9 @@ import {
     MenuWrap,
     Nav,
     Ul,
+    UserMenu,
+    UserMenuWrap,
+    UserOpt,
 } from './Navbar.style';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useAuthContext } from '../../context/AuthProvider';
@@ -49,13 +52,20 @@ const Navbar = () => {
                 </>
             )}
             {currentUser && (
-                <div>
+                <UserMenuWrap>
                     <DisplayName>{userName}</DisplayName>
-                    <Avatar
-                        src={photoUrl ? photoUrl : RegisterCard}
-                        onClick={() => logout()}
-                    />
-                </div>
+                    <Avatar src={photoUrl ? photoUrl : RegisterCard} />
+                    <UserMenu>
+                        <Arrow></Arrow>
+                        <UserOpt onClick={() => navigate('/post')}>
+                            New Article
+                        </UserOpt>
+                        <UserOpt onClick={() => navigate('/profile')}>
+                            Profile
+                        </UserOpt>
+                        <UserOpt onClick={() => logout()}>Logout</UserOpt>
+                    </UserMenu>
+                </UserMenuWrap>
             )}
         </Nav>
     );

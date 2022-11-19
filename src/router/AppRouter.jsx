@@ -9,10 +9,14 @@ import Navbar from '../components/navbar/Navbar';
 import PrivateRoutes from './PrivateRoutes';
 import Details from '../pages/details/Details';
 import UpdateBlog from '../pages/UpdateBlog';
+import Aside from '../components/aside/Aside';
+import { useAuthContext } from '../context/AuthProvider';
 
 const AppRouter = () => {
+    const { currentUser } = useAuthContext();
     return (
         <BrowserRouter>
+            {currentUser && <Aside />}
             <Navbar />
             <Routes>
                 <Route path="/" element={<Dashboard />} />

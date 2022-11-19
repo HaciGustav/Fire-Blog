@@ -4,7 +4,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     row-gap: 1rem;
-    width: 80%;
+    width: 75%;
     margin-inline: auto;
     margin-top: 1rem;
 `;
@@ -35,6 +35,13 @@ export const H1 = styled.h1`
     letter-spacing: -2px;
 `;
 export const Img = styled.img`
+    max-width: 100%;
+    max-height: 100%;
+    margin-left: 1rem;
+`;
+export const ImgWrapper = styled.div`
+    max-height: 50vh;
+    min-height: 10vh;
     width: 100%;
 `;
 export const Article = styled.p`

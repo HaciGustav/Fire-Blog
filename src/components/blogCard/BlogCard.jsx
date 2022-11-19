@@ -6,8 +6,10 @@ import {
     CardContainer,
     CardHeader,
     CardInfo,
+    Column,
     Date,
     Img,
+    MainWrapper,
     Overview,
     Tag,
     Tags,
@@ -15,32 +17,45 @@ import {
 } from './BlogCard.style';
 
 const BlogCard = ({ article }) => {
-    const { author, imgURL, text, likes, title, date, tags, id } = article;
+    const {
+        author,
+        imgURL,
+        text,
+        title,
+        date,
+        tag1,
+        tag2,
+        tag3,
+        id,
+        authorPP,
+    } = article;
     const navigate = useNavigate();
+
+    const textPart =
+        text?.length >= 300 ? text?.substring(0, 300) + '...' : text;
+
     return (
-        <div onClick={() => navigate(`/details/${id}`)}>
+        <MainWrapper onClick={() => navigate(`/details/${id}`)}>
             <CardHeader>
-                <Avatar
-                    src={
-                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiN-GI6m2DnQonY8yV4IMpStO5d498r3Ac9FNQcwmG&s'
-                    }
-                />
-                <Author>{author}</Author>
-                <Date>{date}</Date>
+                <Avatar src={authorPP} />
+                <Column>
+                    <Author>{author}</Author>
+                    <Date>{date}</Date>
+                </Column>
             </CardHeader>
             <CardContainer>
                 <CardInfo>
                     <Title>{title}</Title>
-                    <Overview>{text}</Overview>
+                    <Overview>{textPart}</Overview>
                     <Tags>
-                        {tags?.map((tag, i) => (
-                            <Tag key={i}>{tag.tag}</Tag>
-                        ))}
+                        {tag1 && <Tag>{tag1}</Tag>}
+                        {tag2 && <Tag>{tag2}</Tag>}
+                        {tag3 && <Tag>{tag3}</Tag>}
                     </Tags>
                 </CardInfo>
                 <Img src={imgURL} />
             </CardContainer>
-        </div>
+        </MainWrapper>
     );
 };
 export default BlogCard;

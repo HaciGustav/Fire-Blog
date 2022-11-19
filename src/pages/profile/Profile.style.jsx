@@ -8,7 +8,9 @@ export const Container = styled.div`
     align-items: center;
     background-image: url(${profileBG});
     background-position: center;
+
     background-size: cover;
+    background-attachment: fixed;
 `;
 
 export const ProfileCard = styled.div`
@@ -17,8 +19,10 @@ export const ProfileCard = styled.div`
     border-radius: 1rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 1rem 2rem;
+    /* justify-content: space-around; */
+
+    min-width: 40%;
+    padding: 1rem;
     row-gap: 1rem;
 `;
 export const Avatar = styled.img`
@@ -26,6 +30,8 @@ export const Avatar = styled.img`
     width: 120px;
     height: 120px;
     border-radius: 50%;
+    outline: 2px solid #107e7d;
+    outline-offset: 2px;
 `;
 export const Name = styled.h4`
     color: #ccc;
@@ -33,4 +39,37 @@ export const Name = styled.h4`
 export const Email = styled.p`
     text-align: center;
     color: #ccc;
+`;
+export const H5 = styled.h5`
+    color: #ccc;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 0.5rem;
+`;
+export const Articles = styled.ul`
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5rem;
+    border-top: 3px double #ccc;
+    padding: 0.5rem 0;
+`;
+export const Article = styled.li`
+    border-bottom: 1px solid #ccc;
+    list-style-type: none;
+    padding: 0.4rem;
+    color: #ccc;
+    transition: border-left 0.3s;
+    cursor: pointer;
+    &:hover {
+        border-left: 8px solid #ccc;
+    }
+`;
+export const UserInfo = styled.div`
+    display: flex;
+    justify-content: space-around;
+
+    @media (max-width: 400px) {
+        flex-direction: column;
+        row-gap: 10px;
+        align-items: center;
+    }
 `;

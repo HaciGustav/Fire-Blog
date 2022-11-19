@@ -71,7 +71,7 @@ const NewBlog = () => {
                                     value={values.text}
                                     onChange={handleChange}
                                     multiline
-                                    rows={10}
+                                    rows={8}
                                     variant="filled"
                                     error={touched.text && Boolean(errors.text)}
                                     helperText={touched.text && errors.text}

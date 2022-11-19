@@ -46,7 +46,7 @@ export const MenuItem = styled.li`
 `;
 export const MenuWrap = styled.div`
     position: relative;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     display: none;
     &:hover ${Menu} {
         display: block;
@@ -56,19 +56,41 @@ export const MenuWrap = styled.div`
     }
 `;
 export const Logo = styled.span`
-    background-color: red;
+    font-family: 'Pacifico', cursive;
+    font-size: 2rem;
+    width: 150px;
+    text-align: center;
     display: flex;
     align-items: center;
     cursor: pointer;
 `;
+export const UserMenuWrap = styled(MenuWrap)`
+    display: block;
+`;
+export const UserMenu = styled(Menu)`
+    z-index: 5;
+`;
+export const UserOpt = styled(MenuItem)`
+    &:hover {
+        border: 1px solid #ccc;
+        border-radius: 0 8px 0 8px;
+    }
+`;
+
 export const Avatar = styled.img`
     vertical-align: middle;
     width: 2rem;
     height: 2rem;
     border-radius: 50%;
     cursor: pointer;
+    &:hover ${UserMenu} {
+        display: block;
+    }
 `;
 export const DisplayName = styled.span`
     margin-right: 5px;
     font-weight: 500;
+    @media (max-width: 400px) {
+        display: none;
+    }
 `;
