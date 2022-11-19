@@ -6,7 +6,9 @@ import {
     getDoc,
     getDocs,
     getFirestore,
+    query,
     updateDoc,
+    where,
 } from '@firebase/firestore';
 import { initializeApp } from 'firebase/app';
 import {
@@ -16,6 +18,8 @@ import {
     signInWithEmailAndPassword,
     onAuthStateChanged,
     updateProfile,
+    GoogleAuthProvider,
+    signInWithPopup,
 } from 'firebase/auth';
 import swal from 'sweetalert';
 
@@ -84,6 +88,20 @@ export const userObserver = (setCurrentUser) => {
     });
 };
 
+export const signUpWithGoogle = (navigate) => {
+    const provider = new GoogleAuthProvider();
+
+    signInWithPopup(auth, provider)
+        .then((result) => {
+            navigate(-1);
+            // toastSuccessNotify("Logged in successfully!");
+        })
+        .catch((error) => {
+            // Handle Errors here.
+            console.log(error);
+        });
+};
+
 //AUTHENTICATION END
 
 //FIRESTORE START
@@ -112,13 +130,14 @@ export const addArticle = async (e, values, navigate) => {
         addDoc(colRef, {
             title: values.title,
             author: auth.currentUser.email,
+            authorPP: auth.currentUser.photoURL
+                ? auth.currentUser.photoURL
+                : `https://spng.pngfind.com/pngs/s/649-6494435_gender-neutral-user-guest-png-transparent-png.png`,
             imgURL: values.url,
             text: values.text,
-            tags: [
-                { tag: values.tag1 },
-                { tag: values.tag2 },
-                { tag: values.tag3 },
-            ],
+            tag1: values.tag1,
+            tag2: values.tag2,
+            tag3: values.tag3,
             date: new Date().toLocaleDateString('tr'),
         });
         console.log('posted');
@@ -141,7 +160,6 @@ export const deleteArticle = async (id, navigate) => {
     });
 
     if (confirm) {
-        console.log(confirm);
         try {
             deleteDoc(docRef);
             navigate('/');
@@ -163,24 +181,39 @@ export const getArticle = async (id, setArticle) => {
     }
 };
 
-export const updateArticle = async (e, id, values) => {
+export const updateArticle = async (e, id, values, navigate) => {
     e.preventDefault();
     const docRef = doc(db, 'Articles', id);
     const data = {
         title: values.title,
-        // imgURL: values.url,
-        // text: values.text,
-        // tags: [
-        //     { tag: values.tag1 },
-        //     { tag: values.tag2 },
-        //     { tag: values.tag3 },
-        // ],
-        date: new Date().toLocaleDateString('tr'),
+        imgURL: values.imgURL,
+        text: values.text,
+        tag1: values.tag1,
+        tag2: values.tag2,
+        tag3: values.tag3,
     };
 
     try {
         await updateDoc(docRef, data);
-        console.log('updated');
+        navigate('/');
+    } catch (error) {
+        console.log(error.message);
+    }
+};
+
+export const userArticles = async (email, setArticles) => {
+    const articleArray = [];
+    const q = query(
+        collection(db, 'Articles'),
+        where('author', '==', `${email}`)
+    );
+    try {
+        const querySnapshot = await getDocs(q);
+
+        querySnapshot.forEach((doc) => {
+            articleArray.push({ ...doc.data(), id: doc.id });
+        });
+        setArticles(articleArray);
     } catch (error) {
         console.log(error.message);
     }
