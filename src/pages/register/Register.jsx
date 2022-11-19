@@ -7,6 +7,8 @@ import { FcGoogle } from 'react-icons/fc';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import RegisterCard from '../../assets/RegisterCard.jpg';
+import { register } from '../../helpers/firebase';
+import { useNavigate } from 'react-router-dom';
 
 const loginSchema = yup.object().shape({
     email: yup.string().email().required(),
@@ -19,12 +21,10 @@ const loginSchema = yup.object().shape({
         .matches(/[a-z]/)
         .matches(/[A-Z]/)
         .matches(/[!,?{}><%&$#£+-.]+/),
-    passwordConfirm: yup
-        .string()
-        .oneOf([yup.ref('password'), null], 'Passwords must match'),
 });
 
 const Register = () => {
+    const navigate = useNavigate();
     return (
         <Container>
             <CardContainer>
@@ -34,9 +34,13 @@ const Register = () => {
                     initialValues={{
                         email: '',
                         password: '',
-                        passwordConfirm: '',
+                        name: '',
+                        lastName: '',
                     }}
-                    validationSchema={loginSchema}>
+                    validationSchema={loginSchema}
+                    onSubmit={(values, actions) => {
+                        actions.resetForm();
+                    }}>
                     {({
                         values,
                         isSubmitting,
@@ -46,6 +50,23 @@ const Register = () => {
                         errors,
                     }) => (
                         <Form>
+                            <TextField
+                                type={'text'}
+                                id="name"
+                                label="Name"
+                                variant="standard"
+                                onChange={handleChange}
+                                value={values.name}
+                            />
+                            <TextField
+                                type={'text'}
+                                id="lastName"
+                                label="Last Name"
+                                variant="standard"
+                                onChange={handleChange}
+                                value={values.lastName}
+                            />
+
                             <TextField
                                 type={'email'}
                                 id="email"
@@ -70,34 +91,22 @@ const Register = () => {
                                 }
                                 helperText={touched.password && errors.password}
                             />
-                            <TextField
-                                type={'password'}
-                                id="passwordConfirm"
-                                label="Password"
-                                variant="standard"
-                                value={values.passwordConfirm}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                error={
-                                    touched.passwordConfirm &&
-                                    Boolean(errors.passwordConfirm)
-                                }
-                                helperText={
-                                    touched.passwordConfirm &&
-                                    errors.passwordConfirm
-                                }
-                            />
+
                             <LoadingButton
                                 sx={{ marginTop: '0.5rem' }}
                                 loadingPosition="center"
-                                variant="contained">
+                                variant="contained"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    register(
+                                        values.email,
+                                        values.password,
+                                        values.name,
+                                        values.lastName,
+                                        navigate
+                                    );
+                                }}>
                                 Register
-                            </LoadingButton>
-                            <LoadingButton
-                                sx={{ backgroundColor: '#000' }}
-                                loadingPosition="center"
-                                variant="contained">
-                                <FcGoogle /> Continue With Google
                             </LoadingButton>
                         </Form>
                     )}

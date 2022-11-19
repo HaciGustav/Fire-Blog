@@ -59,4 +59,16 @@ export const Logo = styled.span`
     background-color: red;
     display: flex;
     align-items: center;
+    cursor: pointer;
+`;
+export const Avatar = styled.img`
+    vertical-align: middle;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    cursor: pointer;
+`;
+export const DisplayName = styled.span`
+    margin-right: 5px;
+    font-weight: 500;
 `;

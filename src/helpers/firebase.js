@@ -6,6 +6,7 @@ import {
     getDoc,
     getDocs,
     getFirestore,
+    updateDoc,
 } from '@firebase/firestore';
 import { initializeApp } from 'firebase/app';
 import {
@@ -162,8 +163,27 @@ export const getArticle = async (id, setArticle) => {
     }
 };
 
-export const updateArticle = async (id, values) => {
+export const updateArticle = async (e, id, values) => {
+    e.preventDefault();
     const docRef = doc(db, 'Articles', id);
+    const data = {
+        title: values.title,
+        // imgURL: values.url,
+        // text: values.text,
+        // tags: [
+        //     { tag: values.tag1 },
+        //     { tag: values.tag2 },
+        //     { tag: values.tag3 },
+        // ],
+        date: new Date().toLocaleDateString('tr'),
+    };
+
+    try {
+        await updateDoc(docRef, data);
+        console.log('updated');
+    } catch (error) {
+        console.log(error.message);
+    }
 };
 
 //FIRESTORE END

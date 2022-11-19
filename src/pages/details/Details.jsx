@@ -30,7 +30,7 @@ const Details = () => {
 
     const { email } = currentUser;
     const { date, title, imgURL, text, author, tags } = article;
-    console.log(article);
+
     return (
         <Container>
             <Header>

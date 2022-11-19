@@ -33,8 +33,9 @@ const BlogCard = ({ article }) => {
                     <Title>{title}</Title>
                     <Overview>{text}</Overview>
                     <Tags>
-                        <Tag>JavaScript</Tag>
-                        <Tag>React</Tag>
+                        {tags?.map((tag, i) => (
+                            <Tag key={i}>{tag.tag}</Tag>
+                        ))}
                     </Tags>
                 </CardInfo>
                 <Img src={imgURL} />
