@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from '../pages/login/Login';
 import Register from '../pages/register/Register';
@@ -11,9 +11,18 @@ import Details from '../pages/details/Details';
 import UpdateBlog from '../pages/UpdateBlog';
 import Aside from '../components/aside/Aside';
 import { useAuthContext } from '../context/AuthProvider';
+import { getUser } from '../helpers/firebase';
+import NotFound from '../pages/notFound/NotFound';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/ReactToastify.min.css';
 
 const AppRouter = () => {
-    const { currentUser } = useAuthContext();
+    const { currentUser, setUser } = useAuthContext();
+
+    const { email } = currentUser;
+    useEffect(() => {
+        getUser(email, setUser);
+    }, []);
     return (
         <BrowserRouter>
             {currentUser && <Aside />}
@@ -27,8 +36,11 @@ const AppRouter = () => {
                     <Route path="/edit/:id" element={<UpdateBlog />} />
                     <Route path="/post" element={<NewBlog />} />
                     <Route path="/profile" element={<Profile />} />
+                    <Route path="/*" element={<NotFound />} />
                 </Route>
+                <Route path="*" element={<NotFound />} />
             </Routes>
+            <ToastContainer />
         </BrowserRouter>
     );
 };

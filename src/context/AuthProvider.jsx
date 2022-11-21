@@ -1,18 +1,33 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { createContext } from 'react';
-import { userObserver } from '../helpers/firebase';
+import { getUser, userObserver } from '../helpers/firebase';
 
 const authContext = createContext();
 
 const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState({});
+    const [userAvatar, setUserAvatar] = useState('');
+    const [user, setUser] = useState([]);
 
     useEffect(() => {
-        userObserver(setCurrentUser);
+        userObserver(setCurrentUser, setUser);
     }, []);
 
+    useEffect(() => {
+        getUser(currentUser?.email, setUser);
+    }, []);
+    // const [userDetails] = user;
+    // const { authorPP } = userDetails;
+
     return (
-        <authContext.Provider value={{ currentUser }}>
+        <authContext.Provider
+            value={{
+                currentUser,
+                userAvatar,
+                setUserAvatar,
+                user,
+                setUser,
+            }}>
             {children}
         </authContext.Provider>
     );

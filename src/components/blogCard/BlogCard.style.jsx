@@ -62,11 +62,12 @@ export const Tags = styled.div`
 export const Tag = styled.span`
     font-size: 0.8rem;
     padding: 0.3rem 0.4rem;
-    background-color: #eee;
+    background-color: #ccc;
     border-radius: 1rem;
 `;
 export const Column = styled.div`
     display: flex;
+    column-gap: 5px;
     padding-bottom: 0.5rem;
     @media (max-width: 500px) {
         flex-direction: column;

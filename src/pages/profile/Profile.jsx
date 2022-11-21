@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { BiRightArrow } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../context/AuthProvider';
-import { getAllArticles, userArticles } from '../../helpers/firebase';
+import { getAllArticles, userArticles, getUser } from '../../helpers/firebase';
+import AvatarMenu from '../../components/avatarMenu/AvatarMenu';
 import RegisterCard from '../../assets/RegisterCard.jpg';
 import {
     Article,
@@ -14,25 +15,37 @@ import {
     Name,
     ProfileCard,
     UserInfo,
+    AvatarWrap,
+    AvatarBtn,
 } from './Profile.style';
 
 const Profile = () => {
     const [articles, setArticles] = useState([]);
+    const [isShown, setIsShown] = useState(false);
+    // const [user, setUser] = useState([]);
 
-    const { currentUser } = useAuthContext();
+    const { currentUser, setUserAvatar, userAvatar, user, setUser } =
+        useAuthContext();
     const { email } = currentUser;
 
     const navigate = useNavigate();
-
+    const [userDetails] = user;
     useEffect(() => {
         userArticles(email, setArticles);
+        getUser(email, setUser);
     }, []);
 
     return (
         <Container>
             <ProfileCard>
                 <UserInfo>
-                    <Avatar src={RegisterCard} />
+                    <AvatarWrap>
+                        <Avatar src={userDetails?.authorPP} />
+                        <AvatarBtn onClick={() => setIsShown(true)}>
+                            Change Avatar
+                        </AvatarBtn>
+                    </AvatarWrap>
+
                     <div>
                         <H5>User Name</H5>
                         <Name>
@@ -60,11 +73,11 @@ const Profile = () => {
                 </Articles>
                 {!articles.length && (
                     <h2 style={{ textAlign: 'center', color: '#ccc' }}>
-                        {' '}
                         You Don't Have Any Article!!
                     </h2>
                 )}
             </ProfileCard>
+            <AvatarMenu isShown={isShown} setIsShown={setIsShown} />
         </Container>
     );
 };

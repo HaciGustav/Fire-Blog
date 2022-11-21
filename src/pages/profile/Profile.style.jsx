@@ -8,9 +8,9 @@ export const Container = styled.div`
     align-items: center;
     background-image: url(${profileBG});
     background-position: center;
-
     background-size: cover;
     background-attachment: fixed;
+    position: relative;
 `;
 
 export const ProfileCard = styled.div`
@@ -72,4 +72,20 @@ export const UserInfo = styled.div`
         row-gap: 10px;
         align-items: center;
     }
+`;
+
+export const AvatarBtn = styled.button`
+    border: none;
+    background-color: #36465d;
+    color: #fff;
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+`;
+export const AvatarWrap = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 10px;
 `;

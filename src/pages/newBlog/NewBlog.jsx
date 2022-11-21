@@ -6,6 +6,7 @@ import { addArticle } from '../../helpers/firebase';
 import { CardContainer, Container, Form, H2 } from './NewBlog.style';
 import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../../context/AuthProvider';
 
 const formSchema = yup.object().shape({
     title: yup.string().required().max(100),
@@ -14,6 +15,11 @@ const formSchema = yup.object().shape({
 });
 
 const NewBlog = () => {
+    const { user } = useAuthContext();
+
+    const userDetail = user[0];
+    const { authorPP } = userDetail;
+
     const navigate = useNavigate();
     return (
         <Container>
@@ -123,7 +129,12 @@ const NewBlog = () => {
                                     onClick={(e) => {
                                         values.title &&
                                             values.text &&
-                                            addArticle(e, values, navigate);
+                                            addArticle(
+                                                e,
+                                                values,
+                                                navigate,
+                                                authorPP
+                                            );
                                     }}>
                                     Send Article
                                 </LoadingButton>

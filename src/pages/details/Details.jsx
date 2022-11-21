@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useAuthContext } from '../../context/AuthProvider';
 import { useDataContext } from '../../context/DataProvider';
 import { deleteArticle, getArticle } from '../../helpers/firebase';
+import RegisterCard from '../../assets/RegisterCard.jpg';
 import {
     Article,
     Author,
@@ -18,26 +19,31 @@ import {
     Tag,
     Tags,
 } from './Details.style';
+import { toastWarnNotify } from '../../helpers/toastNotify';
 
 const Details = () => {
     const [article, setArticle] = useState({});
     const navigate = useNavigate();
     const { id } = useParams();
-
+    console.log(id);
     useEffect(() => {
         getArticle(id, setArticle);
     }, []);
     const { formValues, setFormValues } = useDataContext();
     const { currentUser } = useAuthContext();
     const { email } = currentUser;
-    const { date, title, imgURL, text, author, tag1, tag2, tag3 } = article;
+    if (!article) {
+        toastWarnNotify('sorry wrong page!!');
+        navigate('/');
+    }
+    const { date, title, imgURL, text, author, tag1, tag2, tag3, authorPP } =
+        article;
 
     return (
         <Container>
             <Header>
-                <Avatar
-                    src={'https://www.w3schools.com/howto/img_avatar.png'}
-                />
+                <Avatar src={authorPP} />
+
                 <HeaderInfo>
                     <Author>{author}</Author>
                     <Date>{date}</Date>
@@ -52,6 +58,7 @@ const Details = () => {
                 {tag2 && <Tag>{tag2}</Tag>}
                 {tag3 && <Tag>{tag3}</Tag>}
             </Tags>
+
             <Article>{text}</Article>
 
             {author == email && (

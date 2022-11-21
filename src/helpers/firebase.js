@@ -53,12 +53,14 @@ export const register = async (email, password, name, lastName, navigate) => {
         });
         console.log(userCredential);
         navigate('/');
+
+        addUser(name, lastName, email);
     } catch (error) {
         console.log(error);
     }
 };
 
-export const login = async (email, password, navigate) => {
+export const login = async (email, password, navigate, setUser) => {
     console.log('logged in');
     try {
         const userCredential = await signInWithEmailAndPassword(
@@ -66,7 +68,7 @@ export const login = async (email, password, navigate) => {
             email,
             password
         );
-        console.log(userCredential);
+        getUser(email, setUser);
         navigate('/');
     } catch (error) {
         console.log(error);
@@ -75,12 +77,12 @@ export const login = async (email, password, navigate) => {
 export const logout = async () => {
     await signOut(auth);
 };
-export const userObserver = (setCurrentUser) => {
+export const userObserver = (setCurrentUser, setUser) => {
     onAuthStateChanged(auth, (user) => {
         if (user) {
             const { email, displayName, photoURL } = user;
             setCurrentUser({ email, displayName, photoURL });
-            // console.log(user);
+            getUser(email, setUser);
         } else {
             setCurrentUser(false);
             console.log('user signed out');
@@ -93,7 +95,9 @@ export const signUpWithGoogle = (navigate) => {
 
     signInWithPopup(auth, provider)
         .then((result) => {
-            navigate(-1);
+            console.log(result);
+            addUser(auth.currentUser.name, null, auth.currentUser.email);
+            navigate('/');
             // toastSuccessNotify("Logged in successfully!");
         })
         .catch((error) => {
@@ -124,15 +128,14 @@ export const getAllArticles = async (setArticles) => {
 };
 
 // Add doc into collection
-export const addArticle = async (e, values, navigate) => {
+export const addArticle = async (e, values, navigate, authorPP) => {
     e.preventDefault();
+
     try {
         addDoc(colRef, {
             title: values.title,
             author: auth.currentUser.email,
-            authorPP: auth.currentUser.photoURL
-                ? auth.currentUser.photoURL
-                : `https://spng.pngfind.com/pngs/s/649-6494435_gender-neutral-user-guest-png-transparent-png.png`,
+            authorPP,
             imgURL: values.url,
             text: values.text,
             tag1: values.tag1,
@@ -140,6 +143,7 @@ export const addArticle = async (e, values, navigate) => {
             tag3: values.tag3,
             date: new Date().toLocaleDateString('tr'),
         });
+        //TODO: toastify
         console.log('posted');
         navigate('/');
     } catch (error) {
@@ -220,3 +224,51 @@ export const userArticles = async (email, setArticles) => {
 };
 
 //FIRESTORE END
+
+//fireStore Users
+
+const colRefUsers = collection(db, 'users');
+
+export const addUser = async (name, lastName, email) => {
+    try {
+        addDoc(colRefUsers, {
+            userName: `${name} ${lastName}`,
+            email: email,
+            authorPP: `https://github.com/HaciGustav/Fire-Blog/blob/main/public/avatars/avt_gorilla.jpg?raw=true`,
+        });
+        console.log('user added');
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getUser = async (email, setUser) => {
+    try {
+        const snapshot = await getDocs(colRefUsers);
+        const users = [];
+        snapshot?.docs.forEach((doc) => {
+            users.push({ ...doc.data(), id: doc.id });
+        });
+        const user = users.filter((item) => item.email == email);
+        setUser(user);
+    } catch (error) {
+        console.log(error.message);
+    }
+};
+
+export const setAvatar = async (userDetails, e) => {
+    const { id, email, userName } = userDetails;
+    const docRef = doc(db, 'users', id);
+    const data = {
+        authorPP: e.target.name,
+        email,
+        userName,
+    };
+    console.log(e.target.name);
+    try {
+        await updateDoc(docRef, data);
+        console.log('avatar Updated', data);
+    } catch (error) {
+        console.log(error.message);
+    }
+};
