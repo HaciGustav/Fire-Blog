@@ -7,6 +7,7 @@ export const MainWrapper = styled.div`
         rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
         rgba(0, 0, 0, 0.09) 0px 32px 16px;
     padding-inline: 1rem;
+    cursor: pointer;
 `;
 
 export const CardContainer = styled.div`

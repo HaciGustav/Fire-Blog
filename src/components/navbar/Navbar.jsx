@@ -30,18 +30,15 @@ const Navbar = () => {
           displayName.slice(1, displayName.length)
         : 'User';
     const navigate = useNavigate();
-    console.log(user);
 
     useEffect(() => {
-        setTimeout(() => {
-            const [userDetails] = user;
+        const [userDetails] = user;
 
-            setAuthorAvatar(
-                `https://github.com/HaciGustav/Fire-Blog/blob/main/public${userDetails?.authorPP}?raw=true`
-            );
-        }, 1000);
+        setAuthorAvatar(
+            `https://github.com/HaciGustav/Fire-Blog/blob/main/public${userDetails?.authorPP}?raw=true`
+        );
     }, [user]);
-
+    console.log(user);
     return (
         <Nav>
             <Logo onClick={() => navigate('/')}>H.World</Logo>
