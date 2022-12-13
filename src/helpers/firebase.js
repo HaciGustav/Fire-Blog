@@ -22,6 +22,11 @@ import {
     signInWithPopup,
 } from 'firebase/auth';
 import swal from 'sweetalert';
+import {
+    toastFailNotify,
+    toastInfoNotify,
+    toastSuccessNotify,
+} from './toastNotify';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -52,11 +57,12 @@ export const register = async (email, password, name, lastName, navigate) => {
             displayName: name + ' ' + lastName,
         });
         console.log(userCredential);
-        navigate('/');
-
         addUser(name, lastName, email);
+        toastSuccessNotify('Welcome To Family 😎');
+        navigate('/');
     } catch (error) {
         console.log(error);
+        toastFailNotify(`Something Went Wrong !!!`);
     }
 };
 
@@ -69,9 +75,11 @@ export const login = async (email, password, navigate, setUser) => {
             password
         );
         getUser(email, setUser);
+        toastSuccessNotify('Welcome Back');
         navigate('/');
     } catch (error) {
         console.log(error);
+        toastFailNotify(`Something Went Wrong !!!`);
     }
 };
 export const logout = async () => {
@@ -97,12 +105,13 @@ export const signUpWithGoogle = (navigate) => {
         .then((result) => {
             console.log(result);
             addUser(auth.currentUser.name, null, auth.currentUser.email);
+            toastSuccessNotify('Welcome Back');
             navigate('/');
-            // toastSuccessNotify("Logged in successfully!");
         })
         .catch((error) => {
             // Handle Errors here.
             console.log(error);
+            toastFailNotify(`Something Went Wrong !!!`);
         });
 };
 
@@ -143,7 +152,7 @@ export const addArticle = async (e, values, navigate, authorPP) => {
             tag3: values.tag3,
             date: new Date().toLocaleDateString('tr'),
         });
-        //TODO: toastify
+        toastInfoNotify('Artical Posted Successfully');
         console.log('posted');
         navigate('/');
     } catch (error) {

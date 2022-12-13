@@ -11,15 +11,17 @@ export const Container = styled.div`
     background-position: center;
     background-size: cover;
     @media (max-width: 560px) {
-        height: auto;
+        height: 100%;
+        /* min-height: 90%; */
     }
 `;
 export const CardContainer = styled.div`
     border: 1px solid #ccc;
     border-radius: 1rem;
-    padding: 1.5rem;
+    padding: 1rem;
     width: 90%;
     max-width: 900px;
+    max-height: 100%;
     display: flex;
     flex-direction: column;
     background-color: transparent;

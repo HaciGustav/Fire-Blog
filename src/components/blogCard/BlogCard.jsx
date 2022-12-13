@@ -27,6 +27,7 @@ const BlogCard = ({ article }) => {
         tag1,
         tag2,
         tag3,
+        tags,
         id,
         authorPP,
     } = article;
@@ -35,7 +36,7 @@ const BlogCard = ({ article }) => {
     const [userDetails] = user;
     const textPart =
         text?.length >= 300 ? text?.substring(0, 300) + '...' : text;
-
+    console.log(tags);
     return (
         <MainWrapper onClick={() => navigate(`/details/${id}`)}>
             <CardHeader>

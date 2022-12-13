@@ -38,7 +38,7 @@ const Navbar = () => {
             `https://github.com/HaciGustav/Fire-Blog/blob/main/public${userDetails?.authorPP}?raw=true`
         );
     }, [user]);
-    console.log(user);
+
     return (
         <Nav>
             <Logo onClick={() => navigate('/')}>H.World</Logo>

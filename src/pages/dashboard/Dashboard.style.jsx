@@ -10,6 +10,9 @@ export const Container = styled.div`
     background-color: #00000014;
     min-height: 90vh;
     padding: 1rem 0;
+    @media (max-width: 500px) {
+        width: 100%;
+    }
 `;
 
 export const NewBlog = styled.button`

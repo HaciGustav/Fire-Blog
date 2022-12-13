@@ -26,6 +26,7 @@ export const HomeBadge = styled.span`
     font-size: 0.75rem;
     padding: 5px 10px;
     top: -60%;
+
     display: none;
 `;
 export const HomeWrap = styled.div`

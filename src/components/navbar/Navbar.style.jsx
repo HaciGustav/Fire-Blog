@@ -18,6 +18,7 @@ export const Ul = styled.ul`
 `;
 export const Li = styled.li`
     list-style-type: none;
+    font-size: 1.3rem;
     padding: 0.5rem 0;
     cursor: pointer;
 `;

@@ -8,6 +8,9 @@ export const Container = styled.div`
     max-width: 1000px;
     margin-inline: auto;
     margin-top: 1rem;
+    @media (max-width: 550px) {
+        width: 95%;
+    }
 `;
 export const Header = styled.div`
     display: flex;
@@ -48,6 +51,7 @@ export const ImgWrapper = styled.div`
 export const Article = styled.p`
     line-height: 1.7rem;
     border-bottom: 1px solid #ccc;
+    word-wrap: break-word;
 `;
 export const Tags = styled.div`
     display: flex;
@@ -58,6 +62,6 @@ export const Tags = styled.div`
 export const Tag = styled.span`
     font-size: 0.8rem;
     padding: 0.3rem 0.4rem;
-    background-color: #eee;
+    background-color: #eeeeee8d;
     border-radius: 1rem;
 `;

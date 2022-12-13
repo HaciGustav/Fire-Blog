@@ -36,9 +36,19 @@ const Details = () => {
         toastWarnNotify('sorry wrong page!!');
         navigate('/');
     }
-    const { date, title, imgURL, text, author, tag1, tag2, tag3, authorPP } =
-        article;
+    const {
+        date,
+        title,
+        imgURL,
+        text,
+        author,
+        tag1,
+        tag2,
+        tag3,
 
+        authorPP,
+    } = article;
+    console.log(article);
     return (
         <Container>
             <Header>

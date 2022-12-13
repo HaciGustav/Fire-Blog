@@ -16,6 +16,9 @@ export const CardContainer = styled.div`
     border-bottom: 1px solid #ddd;
     column-gap: 2rem;
     padding-bottom: 1rem;
+    @media (max-width: 560px) {
+        flex-direction: column;
+    }
 `;
 export const CardInfo = styled.div`
     display: flex;
@@ -70,7 +73,7 @@ export const Column = styled.div`
     display: flex;
     column-gap: 5px;
     padding-bottom: 0.5rem;
-    @media (max-width: 500px) {
+    @media (max-width: 550px) {
         flex-direction: column;
     }
 `;

@@ -6,10 +6,8 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { FcGoogle } from 'react-icons/fc';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import { getUser, login, signUpWithGoogle } from '../../helpers/firebase';
+import { login, signUpWithGoogle } from '../../helpers/firebase';
 import { useNavigate } from 'react-router-dom';
-import { NavigateNextRounded } from '@mui/icons-material';
-import { useAuthContext } from '../../context/AuthProvider';
 
 const loginSchema = yup.object().shape({
     email: yup.string().email().required(),

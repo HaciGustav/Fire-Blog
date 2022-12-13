@@ -11,7 +11,7 @@ import {
 import { AiOutlineHome, AiOutlineLinkedin } from 'react-icons/ai';
 import { HiOutlineUser, HiOutlineDocument } from 'react-icons/hi';
 import { FiGithub } from 'react-icons/fi';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Aside = () => {
     const navigate = useNavigate();
