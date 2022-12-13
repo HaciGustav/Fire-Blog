@@ -19,6 +19,7 @@ import { useAuthContext } from '../../context/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 import RegisterCard from '../../assets/RegisterCard.jpg';
 import { logout } from '../../helpers/firebase';
+import ArticleSearch from '../ArticleSearch';
 const Navbar = () => {
     const { currentUser, user } = useAuthContext();
     const [authorAvatar, setAuthorAvatar] = useState(
