@@ -63,6 +63,7 @@ export const register = async (email, password, name, lastName, navigate) => {
     } catch (error) {
         console.log(error);
         toastFailNotify(`Something Went Wrong !!!`);
+        toastFailNotify(error.message);
     }
 };
 
@@ -80,6 +81,7 @@ export const login = async (email, password, navigate, setUser) => {
     } catch (error) {
         console.log(error);
         toastFailNotify(`Something Went Wrong !!!`);
+        toastFailNotify(error.message);
     }
 };
 export const logout = async () => {
@@ -112,6 +114,7 @@ export const signUpWithGoogle = (navigate) => {
             // Handle Errors here.
             console.log(error);
             toastFailNotify(`Something Went Wrong !!!`);
+            toastFailNotify(error.message);
         });
 };
 
@@ -132,7 +135,8 @@ export const getAllArticles = async (setArticles) => {
         });
         setArticles(articles);
     } catch (error) {
-        console.log(error.message);
+        toastFailNotify(`Something Went Wrong !!!`);
+        toastFailNotify(error.message);
     }
 };
 
@@ -152,11 +156,12 @@ export const addArticle = async (e, values, navigate, authorPP) => {
             tag3: values.tag3,
             date: new Date().toLocaleDateString('tr'),
         });
-        toastInfoNotify('Artical Posted Successfully');
+        toastSuccessNotify('Artical Posted Successfully');
         console.log('posted');
         navigate('/');
     } catch (error) {
-        console.log(error);
+        toastFailNotify(`Something Went Wrong !!!`);
+        toastFailNotify(error.message);
     }
 };
 
@@ -175,9 +180,11 @@ export const deleteArticle = async (id, navigate) => {
     if (confirm) {
         try {
             deleteDoc(docRef);
+            toastSuccessNotify('Artical Deleted Successfully');
             navigate('/');
         } catch (error) {
-            console.log(error.message);
+            toastFailNotify(`Something Went Wrong !!!`);
+            toastFailNotify(error.message);
         }
     }
 };
@@ -208,9 +215,11 @@ export const updateArticle = async (e, id, values, navigate) => {
 
     try {
         await updateDoc(docRef, data);
+        toastSuccessNotify('Artical Updated Successfully');
         navigate('/');
     } catch (error) {
-        console.log(error.message);
+        toastFailNotify(`Something Went Wrong !!!`);
+        toastFailNotify(error.message);
     }
 };
 
@@ -277,6 +286,7 @@ export const setAvatar = async (userDetails, e) => {
     try {
         await updateDoc(docRef, data);
         console.log('avatar Updated', data);
+        toastSuccessNotify('Avatar Updated');
     } catch (error) {
         console.log(error.message);
     }
