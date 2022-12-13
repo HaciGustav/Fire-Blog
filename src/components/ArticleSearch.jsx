@@ -18,25 +18,7 @@ const ArticleSearch = ({ articles, setSearchValue, searchValue }) => {
     return (
         <Stack
             spacing={2}
-            sx={{ width: '50%', minWidth: '300px', marginInline: 'auto' }}>
-            {/* <Autocomplete
-                id="free-solo-demo"
-                freeSolo
-                options={articles?.map((option) => option.title)}
-                renderInput={(params) => (
-                    <Box component={'form'} sx={{ display: 'flex' }}>
-                        <TextField {...params} label="Search Article" />
-                        <Button
-                            variant="contained"
-                            type="submit"
-                            onClick={(e) => handleSubmit(e)}
-                            sx={{ backgroundColor: '#36465d' }}
-                            endIcon={<SearchSharpIcon />}>
-                            Search
-                        </Button>
-                    </Box>
-                )}
-            /> */}
+            sx={{ width: '60%', minWidth: '280px', marginInline: 'auto' }}>
             <Autocomplete
                 freeSolo
                 id="free-solo-2-demo"
@@ -60,9 +42,9 @@ const ArticleSearch = ({ articles, setSearchValue, searchValue }) => {
                         <Button
                             variant="contained"
                             type="submit"
+                            size="small"
                             onClick={(e) => handleSubmit(e)}
-                            sx={{ backgroundColor: '#36465d' }}
-                            endIcon={<SearchSharpIcon />}>
+                            sx={{ backgroundColor: '#36465d' }}>
                             Search
                         </Button>
                     </Box>

@@ -85,7 +85,12 @@ export const login = async (email, password, navigate, setUser) => {
     }
 };
 export const logout = async () => {
-    await signOut(auth);
+    try {
+        await signOut(auth);
+        toastSuccessNotify("We'll miss you..");
+    } catch (error) {
+        toastFailNotify(`Something Went Wrong !!!`);
+    }
 };
 export const userObserver = (setCurrentUser, setUser) => {
     onAuthStateChanged(auth, (user) => {
@@ -107,7 +112,7 @@ export const signUpWithGoogle = (navigate) => {
         .then((result) => {
             console.log(result);
             addUser(auth.currentUser.name, null, auth.currentUser.email);
-            toastSuccessNotify('Welcome Back');
+            toastSuccessNotify('Welcome...');
             navigate('/');
         })
         .catch((error) => {
@@ -156,7 +161,7 @@ export const addArticle = async (e, values, navigate, authorPP) => {
             tag3: values.tag3,
             date: new Date().toLocaleDateString('tr'),
         });
-        toastSuccessNotify('Artical Posted Successfully');
+        toastSuccessNotify('Article Posted Successfully');
         console.log('posted');
         navigate('/');
     } catch (error) {
