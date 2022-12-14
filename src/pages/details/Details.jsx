@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useAuthContext } from '../../context/AuthProvider';
 import { useDataContext } from '../../context/DataProvider';
 import { deleteArticle, getArticle } from '../../helpers/firebase';
-import RegisterCard from '../../assets/RegisterCard.jpg';
+
 import {
     Article,
     Author,
@@ -28,8 +28,9 @@ const Details = () => {
     console.log(id);
     useEffect(() => {
         getArticle(id, setArticle);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    const { formValues, setFormValues } = useDataContext();
+    const { setFormValues } = useDataContext();
     const { currentUser } = useAuthContext();
     const { email } = currentUser;
     if (!article) {
@@ -48,7 +49,7 @@ const Details = () => {
 
         authorPP,
     } = article;
-    console.log(article);
+
     return (
         <Container>
             <Header>
@@ -71,7 +72,7 @@ const Details = () => {
 
             <Article>{text}</Article>
 
-            {author == email && (
+            {author === email && (
                 <Box
                     sx={{
                         display: ' flex',

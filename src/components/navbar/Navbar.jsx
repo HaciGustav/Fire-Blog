@@ -17,15 +17,15 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import { useAuthContext } from '../../context/AuthProvider';
 import { useNavigate } from 'react-router-dom';
-import RegisterCard from '../../assets/RegisterCard.jpg';
+
 import { logout } from '../../helpers/firebase';
-import ArticleSearch from '../ArticleSearch';
+
 const Navbar = () => {
     const { currentUser, user } = useAuthContext();
     const [authorAvatar, setAuthorAvatar] = useState(
         'https://github.com/HaciGustav/Fire-Blog/blob/main/public/avatars/avt_gorilla.jpg?raw=true'
     );
-    const { displayName, photoUrl } = currentUser;
+    const { displayName } = currentUser;
     const userName = displayName
         ? displayName[0].toUpperCase() +
           displayName.slice(1, displayName.length)

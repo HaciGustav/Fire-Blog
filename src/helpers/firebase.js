@@ -22,11 +22,7 @@ import {
     signInWithPopup,
 } from 'firebase/auth';
 import swal from 'sweetalert';
-import {
-    toastFailNotify,
-    toastInfoNotify,
-    toastSuccessNotify,
-} from './toastNotify';
+import { toastFailNotify, toastSuccessNotify } from './toastNotify';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -70,11 +66,7 @@ export const register = async (email, password, name, lastName, navigate) => {
 export const login = async (email, password, navigate, setUser) => {
     console.log('logged in');
     try {
-        const userCredential = await signInWithEmailAndPassword(
-            auth,
-            email,
-            password
-        );
+        await signInWithEmailAndPassword(auth, email, password);
         getUser(email, setUser);
         toastSuccessNotify('Welcome Back');
         navigate('/');
@@ -272,7 +264,7 @@ export const getUser = async (email, setUser) => {
         snapshot?.docs.forEach((doc) => {
             users.push({ ...doc.data(), id: doc.id });
         });
-        const user = users.filter((item) => item.email == email);
+        const user = users.filter((item) => item.email === email);
         setUser(user);
     } catch (error) {
         console.log(error.message);

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+
 import ArticleSearch from '../../components/ArticleSearch';
 import BlogCard from '../../components/blogCard/BlogCard';
 import { useAuthContext } from '../../context/AuthProvider';
-import { useDataContext } from '../../context/DataProvider';
+
 import { getAllArticles, getUser } from '../../helpers/firebase';
-import { Container, NewBlog } from './Dashboard.style';
+import { Container } from './Dashboard.style';
 
 const Dashboard = () => {
     const { currentUser, setUser } = useAuthContext();
@@ -18,6 +18,7 @@ const Dashboard = () => {
     }, []);
     useEffect(() => {
         getUser(email, setUser);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const isSearched = (item) =>
@@ -38,11 +39,6 @@ const Dashboard = () => {
                 })}
         </Container>
     );
-    // <Container>
-    //     {articles?.map((article) => {
-    //         return <BlogCard key={article?.id} article={article} />;
-    //     })}
-    // </Container>
 };
 
 export default Dashboard;

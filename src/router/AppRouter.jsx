@@ -22,6 +22,7 @@ const AppRouter = () => {
     const { email } = currentUser;
     useEffect(() => {
         getUser(email, setUser);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
         <BrowserRouter>

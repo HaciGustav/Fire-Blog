@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../../context/AuthProvider';
 import {
     Author,
     Avatar,
@@ -32,8 +31,7 @@ const BlogCard = ({ article }) => {
         authorPP,
     } = article;
     const navigate = useNavigate();
-    const { user } = useAuthContext();
-    const [userDetails] = user;
+
     const textPart =
         text?.length >= 300 ? text?.substring(0, 300) + '...' : text;
     console.log(tags);

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { CardContainer, CardImg, Container, Form } from './Login.style';
 import loginCard from '../../assets/loginCard.jpg';
 import { TextField } from '@mui/material';

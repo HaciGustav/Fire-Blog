@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { BiRightArrow } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../context/AuthProvider';
-import { getAllArticles, userArticles, getUser } from '../../helpers/firebase';
+import { userArticles, getUser } from '../../helpers/firebase';
 import AvatarMenu from '../../components/avatarMenu/AvatarMenu';
-import RegisterCard from '../../assets/RegisterCard.jpg';
+
 import {
     Article,
     Articles,
@@ -24,8 +24,7 @@ const Profile = () => {
     const [isShown, setIsShown] = useState(false);
     // const [user, setUser] = useState([]);
 
-    const { currentUser, setUserAvatar, userAvatar, user, setUser } =
-        useAuthContext();
+    const { currentUser, user, setUser } = useAuthContext();
     const { email } = currentUser;
 
     const navigate = useNavigate();
@@ -33,6 +32,7 @@ const Profile = () => {
     useEffect(() => {
         userArticles(email, setArticles);
         getUser(email, setUser);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

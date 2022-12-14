@@ -15,9 +15,8 @@ const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         getUser(currentUser?.email, setUser);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    // const [userDetails] = user;
-    // const { authorPP } = userDetails;
 
     return (
         <authContext.Provider

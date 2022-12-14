@@ -4,8 +4,6 @@ import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
 import { Box } from '@mui/system';
 import { Button } from '@mui/material';
-import SearchSharpIcon from '@mui/icons-material/SearchSharp';
-import { useState } from 'react';
 
 const ArticleSearch = ({ articles, setSearchValue, searchValue }) => {
     const handleChange = (e) => {

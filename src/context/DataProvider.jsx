@@ -1,5 +1,4 @@
 import { createContext, useContext, useState } from 'react';
-import { getAllArticles, getArticle } from '../helpers/firebase';
 
 const dataContext = createContext();
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, CloseBtn, Container, GridContainer } from './AvatarMenu.style';
+import { Avatar, CloseBtn, GridContainer } from './AvatarMenu.style';
 import { TfiClose } from 'react-icons/tfi';
 import { useAuthContext } from '../../context/AuthProvider';
 import { setAvatar } from '../../helpers/firebase';
@@ -31,7 +31,7 @@ const AvatarMenu = ({ isShown, setIsShown }) => {
     const [userDetails] = user;
     const navigate = useNavigate();
 
-    https: return (
+    return (
         <GridContainer isShown={isShown}>
             {avatars.map((item) => {
                 return (

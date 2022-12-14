@@ -1,9 +1,9 @@
 import React from 'react';
 import { CardContainer, CardImg, Container, Form } from '../login/Login.style';
-import loginCard from '../../assets/loginCard.jpg';
+
 import { TextField } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
-import { FcGoogle } from 'react-icons/fc';
+
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import RegisterCard from '../../assets/RegisterCard.jpg';
