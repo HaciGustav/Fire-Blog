@@ -16,6 +16,7 @@ export const Container = styled.div`
     }
 `;
 export const CardContainer = styled.div`
+    margin-top: 4rem;
     border: 1px solid #ccc;
     border-radius: 1rem;
     padding: 1rem;
