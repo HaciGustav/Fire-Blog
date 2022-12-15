@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import newBlogBG from '../../assets/newBlogBG.jpg';
 
 export const Container = styled.div`
-    height: calc(100% - 3rem);
+    min-height: 100vh;
 
     display: flex;
     justify-content: center;

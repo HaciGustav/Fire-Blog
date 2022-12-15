@@ -32,9 +32,9 @@ export const CardHeader = styled.div`
     margin-top: 1rem;
 `;
 export const Date = styled.span`
-    color: #aaa;
+    color: #364653;
     font-size: 0.9rem;
-    font-weight: 300;
+    font-weight: 500;
 `;
 export const Author = styled.span`
     font-size: 0.9rem;
@@ -66,7 +66,7 @@ export const Tags = styled.div`
 export const Tag = styled.span`
     font-size: 0.8rem;
     padding: 0.3rem 0.4rem;
-    background-color: #ccc;
+    background-color: #cccccc99;
     border-radius: 1rem;
 `;
 export const Column = styled.div`

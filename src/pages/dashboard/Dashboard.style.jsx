@@ -3,13 +3,13 @@ import styled from 'styled-components';
 export const Container = styled.div`
     width: 75%;
     margin-inline: auto;
-    margin-top: 3rem;
+    margin-top: 5rem;
 
     display: flex;
     flex-direction: column;
     row-gap: 1rem;
     position: relative;
-    background-color: #00000014;
+    background-color: #00000026;
     min-height: 90vh;
     padding: 1rem 0;
     @media (max-width: 500px) {

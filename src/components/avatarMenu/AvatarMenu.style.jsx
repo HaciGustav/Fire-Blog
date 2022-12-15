@@ -18,7 +18,7 @@ export const GridContainer = styled.div`
     padding: 2rem 1rem;
     gap: 1rem;
     background-color: #ffffff76;
-    border-radius: 2rem;
+    border-radius: 2rem 0 0 2rem;
     max-height: 60vh;
     overflow: auto;
 
@@ -34,6 +34,12 @@ export const GridContainer = styled.div`
             transform: translateY(0);
         }
     }
+    @media (max-width: 900px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 560px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
 `;
 export const Avatar = styled.img`
     width: 10rem;
@@ -42,6 +48,14 @@ export const Avatar = styled.img`
     border-radius: 50%;
     margin: auto;
     cursor: pointer;
+    @media (max-width: 900px) {
+        width: 8rem;
+        height: 8rem;
+    }
+    @media (max-width: 330px) {
+        width: 6rem;
+        height: 6rem;
+    }
 `;
 
 export const CloseBtn = styled.button`

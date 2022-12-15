@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import profileBG from '../../assets/profileBG.jpg';
 
 export const Container = styled.div`
-    height: calc(100% - 3rem);
+    margin-top: 3rem;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;

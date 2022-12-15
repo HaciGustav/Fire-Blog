@@ -28,7 +28,9 @@ const GlobalStyle = createGlobalStyle`
   background: #36465d; 
 }
 #root{
-    height: 100vh;
+    min-height: 100vh;
+    background: rgb(0,194,255);
+background: linear-gradient(90deg, #00c3ff52 26%, #00fffb53 55%, #007bff52 100%);
     /* background-color: #ddd; */
 }
 

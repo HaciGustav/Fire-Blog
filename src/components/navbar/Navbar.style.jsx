@@ -9,7 +9,7 @@ export const Nav = styled.nav`
     justify-content: space-between;
     align-items: center;
     padding-inline: 1rem;
-    height: 3rem;
+    height: 5rem;
     background-color: #36465d;
 `;
 export const Ul = styled.ul`

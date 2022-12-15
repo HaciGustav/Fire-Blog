@@ -7,7 +7,8 @@ export const Container = styled.div`
     width: 75%;
     max-width: 1000px;
     margin-inline: auto;
-    margin-top: 3rem;
+    margin-top: 5rem;
+    padding-top: 1rem;
     @media (max-width: 550px) {
         width: 95%;
     }
@@ -37,9 +38,10 @@ export const Avatar = styled.img`
 `;
 export const H1 = styled.h1`
     letter-spacing: -2px;
+    padding-left: 1rem;
 `;
 export const Img = styled.img`
-    max-width: 50%;
+    max-width: 90%;
     max-height: 50%;
     margin-left: 1rem;
 `;
