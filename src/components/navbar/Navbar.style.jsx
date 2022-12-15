@@ -84,8 +84,8 @@ export const UserOpt = styled(MenuItem)`
 
 export const Avatar = styled.img`
     vertical-align: middle;
-    width: 2rem;
-    height: 2rem;
+    width: 3rem;
+    height: 3rem;
     border-radius: 50%;
     cursor: pointer;
     &:hover ${UserMenu} {

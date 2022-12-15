@@ -47,14 +47,19 @@ const BlogCard = ({ article }) => {
             <CardContainer>
                 <CardInfo>
                     <Title>{title}</Title>
-                    <Overview>{textPart}</Overview>
-                    <Tags>
-                        {tag1 && <Tag>{tag1}</Tag>}
-                        {tag2 && <Tag>{tag2}</Tag>}
-                        {tag3 && <Tag>{tag3}</Tag>}
-                    </Tags>
+                    <div style={{ display: 'flex', columnGap: '10px' }}>
+                        <div>
+                            <Overview>{textPart}</Overview>
+
+                            <Tags>
+                                {tag1 && <Tag>{tag1}</Tag>}
+                                {tag2 && <Tag>{tag2}</Tag>}
+                                {tag3 && <Tag>{tag3}</Tag>}
+                            </Tags>
+                        </div>
+                        <Img src={imgURL} />
+                    </div>
                 </CardInfo>
-                <Img src={imgURL} />
             </CardContainer>
         </MainWrapper>
     );

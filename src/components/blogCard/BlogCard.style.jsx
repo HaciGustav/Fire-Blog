@@ -48,11 +48,17 @@ export const Avatar = styled.img`
 `;
 export const Title = styled.h3``;
 export const Img = styled.img`
-    width: 7.5rem;
+    /* min-width: 9rem; */
+    width: 25%;
     align-self: center;
+    @media (max-width: 560px) {
+        width: 50%;
+    }
 `;
 
 export const Overview = styled.p`
+    max-height: 30vh;
+    overflow: hidden;
     @media (max-width: 560px) {
         display: none;
     }
