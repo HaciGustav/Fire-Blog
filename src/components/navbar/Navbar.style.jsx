@@ -23,6 +23,8 @@ export const Ul = styled.ul`
 export const Li = styled.li`
     list-style-type: none;
     font-size: 1.3rem;
+    font-family: 'Pacifico', cursive;
+    font-weight: 500;
     padding: 0.5rem 0;
     cursor: pointer;
 `;
@@ -46,6 +48,7 @@ export const Arrow = styled.span`
 `;
 export const MenuItem = styled.li`
     list-style-type: none;
+
     padding: 0.4rem;
     cursor: pointer;
 `;
@@ -94,6 +97,7 @@ export const Avatar = styled.img`
 `;
 export const DisplayName = styled.span`
     margin-right: 5px;
+    font-family: 'Pacifico', cursive;
     font-weight: 500;
     @media (max-width: 400px) {
         display: none;

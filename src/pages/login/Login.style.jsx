@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import loginBG from '../../assets/loginBG.jpg';
 
 export const Container = styled.div`
-    height: calc(100% - 3rem);
+    min-height: 100vh;
     background-image: url(${loginBG});
     background-position: center;
     background-size: cover;
